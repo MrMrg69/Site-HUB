@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo da Franquia</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+    <header>
+        <h1 id="franquia-titulo"></h1>
+    </header>
+
+    <main>
+        <div id="resumo-jogos"></div> <!-- Aqui serão exibidos os jogos da franquia -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const nomeFranquia = params.get('nome');  // Obtém o nome da franquia a partir da URL
+
+            const franquiaTitulo = document.getElementById('franquia-titulo');
+            franquiaTitulo.textContent = `Resumo de Jogos da Franquia: ${nomeFranquia.replace(/%20/g, ' ')}`;
+
+            // Você pode adicionar aqui a lógica para buscar os jogos da franquia e exibir o resumo.
+        });
+    </script>
+</body>
+</html>

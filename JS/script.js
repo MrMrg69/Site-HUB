@@ -311,4 +311,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    function atualizarListaFranquias() {
+        listaFranquias.innerHTML = '';
+    
+        // Ordena as franquias em ordem alfabética
+        const franquiasOrdenadas = Object.keys(franquias).sort();
+    
+        franquiasOrdenadas.forEach((franquia, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <a href="./franquia.html?nome=${encodeURIComponent(franquia)}" class="franquia-nome">${franquia}</a>
+                <button class="edit" data-index="${index}">Editar</button>
+                <button class="remove" data-index="${index}">Remover</button>
+            `;
+            listaFranquias.appendChild(li);
+        });
+    
+        adicionarEventosLista('edit', editarFranquia);
+        adicionarEventosLista('remove', removerFranquia);
+    }
+    
+    
 });
