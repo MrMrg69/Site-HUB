@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site de Franquias</title>
-    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/style.css"> <!-- Link para o CSS externo -->
 </head>
 <body>
     <header>
@@ -21,19 +21,44 @@
                                 <button type="submit" id="submit-franquia">Salvar</button>
                             </form>
                         </div>
-                        <ul id="lista-franquias"></ul> <!-- Lista de franquias no dropdown -->
+                        <ul id="lista-franquias">
+                            <li>
+                                <span class="franquia-nome">Assassin's Creed</span>
+                                <button class="edit">Editar</button>
+                                <button class="remove">Remover</button>
+                            </li>
+                            <li>
+                                <span class="franquia-nome">BioShock</span>
+                                <button class="edit">Editar</button>
+                                <button class="remove">Remover</button>
+                            </li>
+                            <li>
+                                <span class="franquia-nome">O Senhor dos Anéis: O Retorno do Rei</span>
+                                <button class="edit">Editar</button>
+                                <button class="remove">Remover</button>
+                            </li>
+                        </ul>
                     </div>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" id="progressao-btn">Progressão &#9662;</a>
                     <div class="dropdown-menu" id="progressao-menu">
-                        <ul id="lista-progressao"></ul> <!-- Lista de franquias no dropdown de progressão -->
+                        <ul id="lista-progressao">
+                            <li>
+                                <span class="franquia-nome">Assassin's Creed</span>
+                                <button class="abrir-menu-lateral">Ver Jogos</button>
+                            </li>
+                            <li>
+                                <span class="franquia-nome">BioShock</span>
+                                <button class="abrir-menu-lateral">Ver Jogos</button>
+                            </li>
+                        </ul>
                     </div>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#">Comparador de Preços &#9662;</a>
+                    <a href="#">Comparador de Preços</a>
                 </li>
 
                 <li class="search">
@@ -49,12 +74,8 @@
     </header>
 
     <main>
-        <div class="highlight">
-            <p>Imagem da Franquia em Destaque</p>
-        </div>
-
-        <!-- Menu lateral para gerenciamento de jogos -->
         <div id="menu-lateral" class="hidden">
+            <button id="fechar-menu-lateral">Fechar</button> <!-- Botão de fechar -->
             <h2 id="franquia-selecionada">Franquia: </h2>
             <form id="form-jogo">
                 <label for="jogo-name">Nome do Jogo:</label>
@@ -62,12 +83,12 @@
                 <button type="submit">Adicionar Jogo</button>
             </form>
             <h3>Jogos Adicionados:</h3>
-            <ul id="lista-jogos"></ul> <!-- Lista de jogos da franquia -->
+            <ul id="lista-jogos"></ul>
         </div>
     </main>
 
     <footer></footer> <!-- Rodapé vazio para futuras implementações -->
 
-    <script src="./JS/script.js"></script>
+    <script src="./JS/script.js"></script> <!-- Script para o JS -->
 </body>
 </html>

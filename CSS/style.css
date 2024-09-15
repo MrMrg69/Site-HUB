@@ -34,6 +34,11 @@ nav ul.menu {
     background-color: #d3d3d3;
     padding: 10px 30px;
     border-radius: 12px;
+    transition: background-color 0.3s ease;  /* Animação ao passar o mouse no menu */
+}
+
+nav ul.menu:hover {
+    background-color: #cccccc;  /* Muda a cor do menu ao passar o mouse */
 }
 
 nav ul.menu li a {
@@ -42,36 +47,99 @@ nav ul.menu li a {
     font-size: 18px;
     padding: 10px 15px;
     font-weight: bold;
+    transition: color 0.3s ease;  /* Transição suave da cor do texto */
+}
+
+nav ul.menu li a:hover {
+    color: #007bff;  /* Muda a cor do texto ao passar o mouse */
 }
 
 /* Dropdown */
 .dropdown-menu {
     display: none;
-    background-color: #f9f9f9;
+    background-color: #fff;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     position: absolute;
     z-index: 1;
-    width: 250px;
+    width: 300px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transição suave no dropdown */
+    transform: translateY(-10px);  /* Movimenta o dropdown para cima ao ser escondido */
 }
 
 .dropdown-menu.active {
     display: block;
+    opacity: 1; /* Exibe o dropdown suavemente */
+    transform: translateY(0);  /* Move o dropdown suavemente para a posição correta */
+}
+
+/* Estilo das franquias no dropdown */
+.dropdown-menu ul#lista-franquias li .franquia-nome {
+    font-weight: bold;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}
+
+/* Botões */
+button {
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease;  /* Adiciona animação de hover */
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);  /* Leve aumento no tamanho ao passar o mouse */
+}
+
+button.edit {
+    background-color: #f0ad4e;
+}
+
+button.remove {
+    background-color: #d9534f;
+}
+
+button.edit:hover {
+    background-color: #ec971f;
+}
+
+button.remove:hover {
+    background-color: #c9302c;
+}
+
+/* Estilo dos botões "Ver Jogos" */
+button.abrir-menu-lateral {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+button.abrir-menu-lateral:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);  /* Aumenta o tamanho ao passar o mouse */
 }
 
 /* Formulário e Menu Lateral */
-#franquia-form,
-#menu-lateral {
+#franquia-form {
     display: none;
 }
 
-#franquia-form.active {
-    display: block;
-}
-
+#franquia-form.active,
 #menu-lateral.active {
-    transform: translateX(0);
+    display: block;
 }
 
 /* Menu Lateral */
@@ -85,6 +153,29 @@ nav ul.menu li a {
     box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.2);
     padding: 20px;
     overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+#menu-lateral.active {
+    transform: translateX(0);
+}
+
+/* Botão Fechar no Menu Lateral */
+#fechar-menu-lateral {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;  /* Animação de hover */
+}
+
+#fechar-menu-lateral:hover {
+    background-color: #c9302c;
+    transform: scale(1.05);  /* Aumenta o botão ao passar o mouse */
 }
 
 /* Textos */
@@ -117,10 +208,12 @@ nav ul.menu li a {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;  /* Adiciona animação de hover */
 }
 
 #form-jogo button:hover {
     background-color: #45a049;
+    transform: scale(1.05);  /* Aumenta o tamanho ao passar o mouse */
 }
 
 /* Listas */
@@ -130,14 +223,7 @@ nav ul.menu li a {
     list-style-type: none;
     padding: 10px 0;
     margin-top: 20px;
-}
-
-#lista-franquias li,
-#lista-progressao li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 0;
+    font-weight: bold;
 }
 
 #lista-jogos li {
@@ -148,50 +234,20 @@ nav ul.menu li a {
     border-bottom: 1px solid #ddd;
 }
 
-/* Botões */
-.franquia-btn,
-.edit-jogo,
-.remove-jogo,
-.edit,
-.remove {
-    background-color: #e0e0e0;
-    border: none;
-    padding: 5px 8px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.franquia-btn {
+/* Estilos de Notificação */
+.notificacao {
+    position: fixed;
+    top: 20px;
+    right: 20px;
     background-color: #4CAF50;
     color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.franquia-btn:hover {
-    background-color: #45a049;
-}
-
-.edit-jogo:hover,
-.remove-jogo:hover,
-.edit:hover,
-.remove:hover {
-    background-color: #ccc;
-}
-
-/* Destaque */
-.highlight {
-    background-color: #ccc;
-    width: 80%;
-    height: 300px;
-    margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #000;
-    text-align: center;
-    border-radius: 8px;
+.notificacao.erro {
+    background-color: #d9534f;
 }
 
 /* Responsividade */
@@ -200,13 +256,7 @@ nav ul.menu li a {
         flex-direction: column;
     }
 
-    .highlight {
-        width: 100%;
-        height: 200px;
-    }
-
     #menu-lateral {
         transition: transform 0.3s ease;
-        transform: translateX(100%);
     }
 }
