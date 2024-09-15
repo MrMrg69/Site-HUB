@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Franquias</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" id="franquias-btn">Franquias &#9662;</a>
+                    <div class="dropdown-menu" id="franquias-menu">
+                        <button id="adicionar-franquia">Adicionar</button>
+                        <div id="franquia-form" class="hidden">
+                            <form id="form-franquia">
+                                <label for="franquia-name">Nome da Franquia:</label>
+                                <input type="text" id="franquia-name" required>
+                                <button type="submit" id="submit-franquia">Salvar</button>
+                            </form>
+                        </div>
+                        <ul id="lista-franquias"></ul> <!-- Lista de franquias no dropdown -->
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" id="progressao-btn">Progressão &#9662;</a>
+                    <div class="dropdown-menu" id="progressao-menu">
+                        <ul id="lista-progressao"></ul> <!-- Lista de franquias no dropdown de progressão -->
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#">Comparador de Preços &#9662;</a>
+                </li>
+
+                <li class="search">
+                    <form id="search-form">
+                        <input type="text" id="search-input" placeholder="Pesquisar...">
+                        <button type="button" id="search-btn">
+                            <img src="search-icon.png" alt="Buscar">
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="highlight">
+            <p>Imagem da Franquia em Destaque</p>
+        </div>
+
+        <!-- Menu lateral para gerenciamento de jogos -->
+        <div id="menu-lateral" class="hidden">
+            <h2 id="franquia-selecionada">Franquia: </h2>
+            <form id="form-jogo">
+                <label for="jogo-name">Nome do Jogo:</label>
+                <input type="text" id="jogo-name" required>
+                <button type="submit">Adicionar Jogo</button>
+            </form>
+            <h3>Jogos Adicionados:</h3>
+            <ul id="lista-jogos"></ul> <!-- Lista de jogos da franquia -->
+        </div>
+    </main>
+
+    <footer></footer> <!-- Rodapé vazio para futuras implementações -->
+
+    <script src="./JS/script.js"></script>
+</body>
+</html>

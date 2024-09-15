@@ -1,0 +1,212 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #e0e0e0;
+    position: fixed;
+    top: 10px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+/* Menu de navegação */
+nav ul.menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    background-color: #d3d3d3;
+    padding: 10px 30px;
+    border-radius: 12px;
+}
+
+nav ul.menu li a {
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+/* Dropdown */
+.dropdown-menu {
+    display: none;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    width: 250px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+/* Formulário e Menu Lateral */
+#franquia-form,
+#menu-lateral {
+    display: none;
+}
+
+#franquia-form.active {
+    display: block;
+}
+
+#menu-lateral.active {
+    transform: translateX(0);
+}
+
+/* Menu Lateral */
+#menu-lateral {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #f0f0f0;
+    box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Textos */
+#franquia-selecionada {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#form-jogo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#form-jogo input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#form-jogo button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#form-jogo button:hover {
+    background-color: #45a049;
+}
+
+/* Listas */
+#lista-franquias,
+#lista-progressao,
+#lista-jogos {
+    list-style-type: none;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+#lista-franquias li,
+#lista-progressao li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+#lista-jogos li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Botões */
+.franquia-btn,
+.edit-jogo,
+.remove-jogo,
+.edit,
+.remove {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.franquia-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.franquia-btn:hover {
+    background-color: #45a049;
+}
+
+.edit-jogo:hover,
+.remove-jogo:hover,
+.edit:hover,
+.remove:hover {
+    background-color: #ccc;
+}
+
+/* Destaque */
+.highlight {
+    background-color: #ccc;
+    width: 80%;
+    height: 300px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    nav ul.menu {
+        flex-direction: column;
+    }
+
+    .highlight {
+        width: 100%;
+        height: 200px;
+    }
+
+    #menu-lateral {
+        transition: transform 0.3s ease;
+        transform: translateX(100%);
+    }
+}
