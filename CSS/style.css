@@ -260,3 +260,27 @@ button.abrir-menu-lateral:hover {
         transition: transform 0.3s ease;
     }
 }
+
+/* Estilos específicos para a página de franquia */
+body.franchise-page {
+    margin-top: 60px; /* Ajuste conforme necessário */
+}
+
+main.franchise-page {
+    padding: 20px;
+    margin-top: 20px;
+}
+
+h1, h2 {
+    margin-bottom: 20px;
+}
+
+ul#lista-jogos-franquia {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul#lista-jogos-franquia li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}

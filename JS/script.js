@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Lidar com o envio do formulário de jogos
+    // Ao adicionar um jogo, chamamos salvarFranquias para garantir a persistência dos dados
     formJogo.addEventListener('submit', (event) => {
         event.preventDefault();
         const jogoName = jogoNameInput.value.trim();
@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             atualizarListaJogos(franquiaAtual);  // Atualiza a lista de jogos
             atualizarListaProgressao();  // Atualiza a lista de progressão
             jogoNameInput.value = '';  // Limpa o campo de input
+            salvarFranquias();  // Salva no localStorage
             mostrarNotificacao('Jogo adicionado com sucesso!');
         } else {
             mostrarNotificacao('Esse jogo já existe ou o nome está vazio!', 'erro');
@@ -245,18 +246,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Funções de armazenamento local
+    // Função para salvar franquias e jogos no localStorage
     function salvarFranquias() {
-        localStorage.setItem('franquias', JSON.stringify(franquias));
+        localStorage.setItem('franquias', JSON.stringify(franquias));  // Armazena as franquias e jogos no localStorage
     }
 
+    // Função para carregar franquias e jogos do localStorage
     function carregarFranquias() {
-        const storedFranquias = localStorage.getItem('franquias');
-        if (storedFranquias) {
-            franquias = JSON.parse(storedFranquias);
-            atualizarListas();
+        const franquiasSalvas = localStorage.getItem('franquias');
+        if (franquiasSalvas) {
+            franquias = JSON.parse(franquiasSalvas);  // Converte de volta para objeto
+            atualizarListas();  // Atualiza as listas de franquias e progressão
         }
     }
+
+    // Carrega as franquias e jogos ao iniciar a página
+    document.addEventListener('DOMContentLoaded', carregarFranquias);
 
     // Carrega as franquias do localStorage ao carregar a página
     carregarFranquias();
@@ -312,25 +317,81 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Atualizar lista de franquias com links corretos para outras páginas
     function atualizarListaFranquias() {
         listaFranquias.innerHTML = '';
-    
+
         // Ordena as franquias em ordem alfabética
         const franquiasOrdenadas = Object.keys(franquias).sort();
-    
+
         franquiasOrdenadas.forEach((franquia, index) => {
             const li = document.createElement('li');
             li.innerHTML = `
-                <a href="./franquia.html?nome=${encodeURIComponent(franquia)}" class="franquia-nome">${franquia}</a>
+                <a href="../HTML/assassinsCreed.html?nome=${encodeURIComponent(franquia)}" class="franquia-nome">${franquia}</a>
                 <button class="edit" data-index="${index}">Editar</button>
                 <button class="remove" data-index="${index}">Remover</button>
             `;
             listaFranquias.appendChild(li);
         });
-    
+
         adicionarEventosLista('edit', editarFranquia);
         adicionarEventosLista('remove', removerFranquia);
     }
-    
-    
+
+    document.getElementById('voltar-home').addEventListener('click', () => {
+        window.location.href = '../index.html';  // Redireciona para a página principal
+    });    
+   
+    // Função para pegar o nome da franquia da URL
+    function getFranquiaFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('nome') || 'Franquia Desconhecida'; // Se não houver nome, retorna um padrão
+    }
+
+    // Função para carregar franquias e jogos do localStorage
+    function carregarFranquias() {
+        const franquiasSalvas = localStorage.getItem('franquias');
+        if (franquiasSalvas) {
+            return JSON.parse(franquiasSalvas);  // Converte de volta para objeto
+        }
+        return {};
+    }
+
+    // Função para atualizar a página com o nome da franquia e seus jogos
+    function atualizarPaginaFranquia() {
+        const nomeFranquia = getFranquiaFromURL();
+        const tituloFranquia = document.getElementById('titulo-franquia');
+        const listaJogosFranquia = document.getElementById('lista-jogos-franquia');
+
+        // Atualiza o título da página
+        tituloFranquia.textContent = `Franquia: ${nomeFranquia}`;
+
+        // Carrega os dados do localStorage
+        const franquias = carregarFranquias();
+
+        // Verifica se a franquia existe e possui jogos
+        if (franquias[nomeFranquia] && franquias[nomeFranquia].length > 0) {
+            // Popula a lista de jogos
+            franquias[nomeFranquia].forEach(jogo => {
+                const li = document.createElement('li');
+                li.textContent = jogo.nome;  // Exibe o nome do jogo
+                listaJogosFranquia.appendChild(li);
+            });
+        } else {
+            // Se não houver jogos, exibe uma mensagem padrão
+            const li = document.createElement('li');
+            li.textContent = "Nenhum jogo encontrado para esta franquia.";
+            listaJogosFranquia.appendChild(li);
+        }
+    }
+
+    // Adiciona o evento para o botão de "Voltar para Home"
+    document.getElementById('voltar-home').addEventListener('click', () => {
+        window.location.href = './index.html';  // Altere para o nome correto da sua página inicial
+    });
+
+    // Chama a função para atualizar a página assim que o conteúdo for carregado
+    document.addEventListener('DOMContentLoaded', atualizarPaginaFranquia);
+
+
 });
