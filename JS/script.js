@@ -118,8 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="favorito-franquia" data-franquia="${franquia}">
                         <img src="../Assets/Geral/favorito.png" alt="Favoritar">
                     </button>
-                    <button class="edit" data-index="${franquia}">Editar</button>
-                    <button class="remove" data-index="${franquia}">Remover</button>
+                    <button class="edit" data-index="${index}">Editar</button>
+                    <button class="remove" data-index="${index}">Remover</button>
                 </div>
             `;
             listaFranquias.appendChild(li);
@@ -205,7 +205,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para remover um jogo
     function removerJogo(event) {
         const index = event.target.dataset.index;
+        const jogoRemovido = franquias[franquiaAtual][index].nome;  // Nome do jogo removido
+
         franquias[franquiaAtual].splice(index, 1);  // Remove o jogo da franquia
+        if (jogosFavoritos[jogoRemovido]) {
+            delete jogosFavoritos[jogoRemovido];
+            atualizarFigurinhasJogos();
+            salvarFavoritos();
+        }
+
         atualizarListaJogos(franquiaAtual);  // Atualiza a lista de jogos
         atualizarListaProgressao();  // Atualiza a lista de progressão
         salvarFranquias();  // Salva no localStorage
@@ -247,11 +255,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function removerFranquia(event) {
         const index = event.target.dataset.index;
         const franquiaSelecionada = Object.keys(franquias)[index];
+        const franquiaRemovida = Object.keys(franquias)[index];
 
         // Verifica se a franquia atual é a que está sendo removida e fecha o menu lateral se for o caso
         if (franquiaSelecionada === franquiaAtual) {
             menuLateral.classList.remove('active');  // Fecha o menu lateral
-        }    
+        }  
+        
+        if (franquiaRemovida === franquiaFavorita) {
+            franquiaFavorita= null;
+            esconderBannerFranquia(); // Esconde o banner da franquia favorita
+            salvarBannerFranquia(); // Atualiza o localStorage
+        }
         
         delete franquias[franquiaSelecionada];  // Remove a franquia
         

@@ -6,23 +6,20 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    background-color: #1c1c1c;
+    color: #e4e4e4;
 }
-
 /* Cabeçalho */
 header {
-    background-color: #e0e0e0;
+    background-color: #292929;
     position: relative;
-    top: 10px;
-    left: 0;
-    right: 0;
     width: 100%;
-    padding: 10px 0;
+    padding: 15px 0;
     display: flex;
     justify-content: center;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid #007bff;
     z-index: 1000;
 }
 
@@ -32,49 +29,44 @@ nav ul.menu {
     justify-content: space-around;
     align-items: center;
     list-style-type: none;
-    background-color: #d3d3d3;
+    background-color: transparent;
     padding: 10px 30px;
-    border-radius: 12px;
-    transition: background-color 0.3s ease;  /* Animação ao passar o mouse no menu */
-}
-
-nav ul.menu:hover {
-    background-color: #cccccc;  /* Muda a cor do menu ao passar o mouse */
 }
 
 nav ul.menu li a {
     text-decoration: none;
-    color: #000;
-    font-size: 18px;
+    color: #f0f0f0;
+    font-size: 20px;
     padding: 10px 15px;
     font-weight: bold;
-    transition: color 0.3s ease;  /* Transição suave da cor do texto */
+    text-transform: uppercase;
+    transition: color 0.3s ease;
 }
 
 nav ul.menu li a:hover {
-    color: #007bff;  /* Muda a cor do texto ao passar o mouse */
+    color: #00ffcc; /* Neon color for hover effect */
 }
 
 /* Dropdown */
 .dropdown-menu {
     display: none;
-    background-color: #fff;
-    padding: 10px;
+    background-color: #2c2c2c;
+    padding: 15px;
     border-radius: 8px;
     position: absolute;
     z-index: 1;
-    width: 300px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ccc;
+    width: 320px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
+    border: 1px solid #007bff;
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Transição suave no dropdown */
-    transform: translateY(-10px);  /* Movimenta o dropdown para cima ao ser escondido */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px);
 }
 
 .dropdown-menu.active {
     display: block;
-    opacity: 1; /* Exibe o dropdown suavemente */
-    transform: translateY(0);  /* Move o dropdown suavemente para a posição correta */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Estilo das franquias no dropdown */
@@ -87,22 +79,24 @@ nav ul.menu li a:hover {
     margin-right: 10px;
 }
 
-/* Botões */
+/* Estilo dos botões */
 button {
-    padding: 8px 12px;
-    background-color: #4CAF50;
+    padding: 10px 15px;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, transform 0.3s ease;  /* Adiciona animação de hover */
+    font-size: 16px;
+    text-transform: uppercase;
     font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);  /* Leve aumento no tamanho ao passar o mouse */
+    background-color: #00ffcc;
+    transform: scale(1.1);
+    box-shadow: 0px 4px 12px rgba(0, 255, 204, 0.7);
 }
 
 /* Formulário e Menu Lateral */
@@ -115,18 +109,19 @@ button:hover {
     display: block;
 }
 
-/* Menu Lateral */
+/* Formulário e Menu Lateral */
 #menu-lateral {
-    position: fixed;         /* Fixa o menu na tela, independentemente do scroll */
-    top: 0;                  /* Posiciona o menu no topo da página */
-    right: 0;                /* Posiciona o menu no lado direito da tela */
-    width: 300px;            /* Largura do menu lateral */
-    height: 100%;            /* Altura total da página */
-    background-color: #f4f4f4; /* Fundo do menu */
-    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);  /* Adiciona sombra para destacar */
-    z-index: 1000;           /* Coloca o menu à frente de outros elementos */
-    padding: 20px;           /* Adiciona espaçamento interno ao menu */
-    overflow-y: auto;        /* Permite rolar o conteúdo caso o menu seja muito longo */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%; /* Certifica-se de que o menu tenha altura total */
+    background-color: #1f1f1f; /* Estilo mais gamer e escuro */
+    color: #fff;
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto; /* Garante que o conteúdo seja rolável */
     transform: translateX(100%);
     transition: transform 0.3s ease;
 }
@@ -149,23 +144,22 @@ button:hover {
     background-color: #d9534f;
     color: white;
     border: none;
-    padding: 8px 12px;
-    margin-bottom: 10px;
+    padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;  /* Animação de hover */
+    transition: background-color 0.3s ease;
 }
 
 #fechar-menu-lateral:hover {
-    background-color: #c9302c;
-    transform: scale(1.05);  /* Aumenta o botão ao passar o mouse */
+    background-color: #ff5f5f;
 }
 
 /* Textos */
 #franquia-selecionada {
+    margin-top: 12px;
     font-size: 24px;
     margin-bottom: 15px;
-    color: #333;
+    color: #666666;
 }
 
 #form-jogo label {
@@ -201,22 +195,23 @@ button:hover {
 }
 
 /* Listas */
-#lista-franquias,
-#lista-progressao,
-#lista-jogos {
+#lista-franquias, #lista-progressao, #lista-jogos {
     list-style-type: none;
     padding: 10px;
     font-weight: bold;
 }
 
 #lista-jogos li {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #ddd;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 10px;
     margin-bottom: 10px;
-    flex-direction: column; /* Alinha o título e subtítulo em coluna */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#lista-jogos li:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 12px rgba(0, 255, 204, 0.7);
 }
 
 /* Estilos de Notificação */
@@ -240,10 +235,9 @@ button:hover {
 @media (max-width: 768px) {
     nav ul.menu {
         flex-direction: column;
-    }
-
-    #menu-lateral {
-        transition: transform 0.3s ease;
+        background-color: #292929;
+        padding: 20px;
+        border-radius: 10px;
     }
 }
 
@@ -370,16 +364,37 @@ button:hover {
     width: 300px; /* Ajuste a largura conforme necessário */
 }
 
+/* Banners */
+#banner-franquia img {
+    margin-top: 7px;
+    width: 100%;
+    transition: transform 0.3s ease, filter 0.3s ease; /* Suave transformação e efeito de brilho */
+    border-radius: 10px;
+    box-shadow: 0px 6px 16px rgba(0, 255, 204, 0.6);
+}
+
+#banner-franquia img:hover {
+    transform: scale(1.05);  /* Leve aumento de 5% no tamanho */
+}
 
 #jogos-favoritos {
     text-align: center;
     margin-top: 20px;
 }
 
+/* Estilo para figurinhas de jogos favoritos */
 #jogos-favoritos img {
-    width: 100px;
-    height: auto;
+    height: 200px; /* Define uma altura fixa */
+    width: auto; /* Mantém a proporção correta */
     margin: 5px;
+    border-radius: 10px; /* Mantém o arredondamento das bordas */
+    object-fit: cover; /* Garante que a imagem seja cortada para caber, mantendo o aspecto */
+    box-shadow: 0px 4px 12px rgba(0, 255, 204, 0.7); /* Adiciona uma sombra para dar destaque */
+    margin: 8px;
+}
+
+#jogos-favoritos img:hover {
+    transform: scale(1.1);
 }
 
 /* Estilo do botão de favorito franquia */
@@ -396,6 +411,9 @@ button:hover {
     width: 24px;  /* Tamanho da estrela */
     height: auto;
     transition: transform 0.3s ease, filter 0.3s ease;  /* Animação suave para brilho */
+    background: none; /* Remove qualquer fundo aplicado à imagem */
+    border: none;     /* Remove a borda */
+    display: block;   /* Garante que a imagem seja tratada como um bloco */
 }
 
 /* Efeito de hover (brilho) */
@@ -441,7 +459,7 @@ button:hover {
     display: none;
 }
 
-/* Estilo para o fundo da modal */
+/* Fundo escurecido da modal */
 .modal {
     display: none;
     position: fixed;
@@ -451,23 +469,38 @@ button:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6); /* Escurece o fundo */
+    backdrop-filter: blur(10px); /* Efeito de desfoque para criar profundidade */
 }
 
-/* Conteúdo da modal */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
+/* Conteúdo da modal flutuante */
+.modal-content { 
+    background-color: #2e2e2e; /*ATENÇÃO POSSÍVEL QUEBRA */
+    margin: 10% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: none;
+    border-radius: 15px;
     width: 80%;
-    max-width: 500px;
-    border-radius: 10px;
+    max-width: 600px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5); /* Sombra para criar efeito de flutuação */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Transição suave para aparecer e flutuar */
+    transform: translateY(-20px); /* Posição inicial para dar efeito de "surgir" */
 }
 
-/* Botão para fechar a modal */
+.modal.active {
+    display: block; /* Mostra a modal */
+
+}
+
+/* Quando a modal estiver ativa */
+.modal.active .modal-content {
+    transform: translateY(0); /* Reseta a posição para flutuar suavemente */
+    opacity: 1; /* Torna a modal visível */
+}
+
+/* Estilos do botão de fechar */
 .fechar-modal {
-    color: #aaa;
+    color: #ffffff;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -476,17 +509,57 @@ button:hover {
 
 .fechar-modal:hover,
 .fechar-modal:focus {
-    color: #000;
+    color: #ff5252;
 }
 
-/* Estilo do título e descrição da modal */
+/* Título e descrição dentro da modal */
 #modal-titulo {
-    font-size: 24px;
+    font-size: 26px;
     margin-bottom: 10px;
+    color: #ffffff;
 }
 
 #modal-descricao {
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1.6;
+    color: #cccccc;
 }
 
+/* Estilo do campo de pesquisa */
+#search-input {
+    width: 200px;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 20px 0 0 20px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#search-input:focus {
+    border-color: #00ccff;
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+}
+
+/* Estilo do botão de busca */
+#search-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 0 20px 20px 0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#search-btn:hover {
+    background-color: #00ccff;
+    transform: scale(1.05); /* Efeito de leve crescimento */
+}
+
+/* Remover a borda ao redor da imagem no botão */
+#search-btn img {
+    vertical-align: middle;
+    margin-left: 5px;
+}
