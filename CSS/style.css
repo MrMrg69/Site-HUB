@@ -397,6 +397,10 @@ button:hover {
     transform: scale(1.1);
 }
 
+#jogos-favoritos h2 {
+    margin-bottom: 12px;
+}
+
 /* Estilo do botão de favorito franquia */
 .favorito-franquia {
     background: none !important;        /* Remove o fundo */
@@ -445,6 +449,7 @@ button:hover {
 }
 
 #banner-franquia {
+    margin-top: 100px;
     width: 100%;              /* Ocupa toda a largura disponível */
     max-width: 1100px;        /* Limita a largura máxima a 1280px */
     height: auto;            /* Define a altura em 720px */
@@ -453,6 +458,17 @@ button:hover {
     overflow: hidden;         /* Oculta partes da imagem que excedem o container */
     border-radius: 10px;    /* Mantém o arredondamento dos cantos */
     object-fit: contain;    /* Garante que a imagem seja redimensionada sem ser cortada */
+}
+
+#titulo-franquia-favorita {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#titulo-franquia-favorita h2 {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 20px;
 }
 
 .hidden {
@@ -562,4 +578,17 @@ button:hover {
 #search-btn img {
     vertical-align: middle;
     margin-left: 5px;
+}
+
+.no-favorites {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;  /* Altura ajustável */
+    background-color: #444;  /* Cor de fundo */
+    color: #fff;  /* Cor do texto */
+    font-size: 24px;  /* Tamanho do texto */
+    border-radius: 10px;  /* Arredondar bordas */
+    border: 2px solid #007bff;  /* Cor da borda */
+    text-align: center;
 }
