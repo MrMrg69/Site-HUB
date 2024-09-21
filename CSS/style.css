@@ -104,34 +104,6 @@ button:hover {
     transform: scale(1.05);  /* Leve aumento no tamanho ao passar o mouse */
 }
 
-button.edit {
-    background-color: #f0ad4e;
-}
-
-button.remove {
-    background-color: #d9534f;
-}
-
-button.edit:hover {
-    background-color: #ec971f;
-}
-
-button.remove:hover {
-    background-color: #c9302c;
-}
-
-/* Estilo dos botões "Ver Jogos" */
-button.abrir-menu-lateral {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-}
-
-button.abrir-menu-lateral:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);  /* Aumenta o tamanho ao passar o mouse */
-}
-
 /* Formulário e Menu Lateral */
 #franquia-form {
     display: none;
@@ -202,6 +174,7 @@ button.abrir-menu-lateral:hover {
 
 #form-jogo button {
     padding: 10px 15px;
+    margin-bottom: 10px;
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -221,29 +194,31 @@ button.abrir-menu-lateral:hover {
 #lista-progressao,
 #lista-jogos {
     list-style-type: none;
-    padding: 10px 0;
-    margin-top: 20px;
+    padding: 10px;
     font-weight: bold;
 }
 
 #lista-jogos li {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 8px 0;
     border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    flex-direction: column; /* Alinha o título e subtítulo em coluna */
 }
 
 /* Estilos de Notificação */
 .notificacao {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    bottom: 20px;  /* Muda a notificação para o canto inferior */
+    right: 20px;   /* Alinha à direita */
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Certifica-se de que a notificação fique acima de outros elementos */
 }
 
 .notificacao.erro {
@@ -261,26 +236,116 @@ button.abrir-menu-lateral:hover {
     }
 }
 
-/* Estilos específicos para a página de franquia */
-body.franchise-page {
-    margin-top: 60px; /* Ajuste conforme necessário */
+/* Estilo do status dos jogos no menu lateral */
+.status-jogo {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+    display: block; /* Garante que o status fique abaixo do nome do jogo */
 }
 
-main.franchise-page {
-    padding: 20px;
-    margin-top: 20px;
+/* Ajuste dos botões no menu lateral */
+.jogo-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
 }
 
-h1, h2 {
-    margin-bottom: 20px;
+.jogo-actions button {
+    margin-right: 8px;
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
-ul#lista-jogos-franquia {
-    list-style-type: none;
-    padding: 0;
+/* Ajuste dos botões no dropdown de franquias */
+.franquia-entry .franquia-actions {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões Editar e Remover */
 }
 
-ul#lista-jogos-franquia li {
+/* Estilo para cada franquia no dropdown */
+.franquia-entry {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* Espaçamento entre franquias */
+}
+
+.franquia-actions button {
+    padding: 8px 12px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.franquia-actions button.edit {
+    background-color: #f0ad4e; /* Cor de fundo para o botão Editar */
+}
+
+.franquia-actions button.edit:hover {
+    background-color: #ec971f;
+}
+
+.franquia-actions button.remove {
+    background-color: #d9534f; /* Cor de fundo para o botão "Remover" */
+}
+
+.franquia-actions button.remove:hover {
+    background-color: #c9302c; /* Cor de fundo quando o botão "Remover" está em hover */
+}
+
+/* Estilo para o rótulo "Nome da Franquia" */
+#franquia-form label {
+    font-weight: bold;  /* Deixa o texto em negrito */
+    font-size: 16px;    /* Aumenta o tamanho da fonte */
+    display: block;     /* Garante que o label fique em uma linha própria */
+    margin-top: 10px;    /* Adiciona um pequeno espaçamento acima */
+}
+
+/* Estilo para as entradas de progressão no dropdown */
+.progressao-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+/* O nome da franquia em progressão ocupa o espaço restante */
+.progressao-entry strong {
+    flex-grow: 1;
+    margin-bottom: 5px; /* Pequeno espaçamento entre o nome da franquia e o botão */
+}
+
+/* Estilo para o botão "Ver Jogos" no dropdown de progressões */
+.progressao-entry button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-left: auto; /* Garante que o botão fique à direita */
+}
+
+.progressao-entry button:hover {
+    background-color: #0056b3;
+}
+
+/* Ajuste do dropdown de progressão */
+.dropdown-menu.progressao-menu {
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Ajuste a largura conforme necessário */
 }
