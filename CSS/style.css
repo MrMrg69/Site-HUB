@@ -13,7 +13,7 @@ body {
 /* Cabeçalho */
 header {
     background-color: #e0e0e0;
-    position: fixed;
+    position: relative;
     top: 10px;
     left: 0;
     right: 0;
@@ -23,6 +23,7 @@ header {
     justify-content: center;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
+    z-index: 1000;
 }
 
 /* Menu de navegação */
@@ -369,16 +370,6 @@ button:hover {
     width: 300px; /* Ajuste a largura conforme necessário */
 }
 
-#banner-franquia {
-    text-align: center;
-    margin-top: 20px;
-}
-
-#banner-franquia img {
-    max-width: 80%;
-    height: auto;
-    border-radius: 10px;
-}
 
 #jogos-favoritos {
     text-align: center;
@@ -433,4 +424,19 @@ button:hover {
 .favorito-jogo img:hover {
     transform: scale(1.2);  /* Aumenta o tamanho da estrela em 20% */
     filter: brightness(1.25);  /* Aplica o brilho */
+}
+
+#banner-franquia {
+    width: 100%;              /* Ocupa toda a largura disponível */
+    max-width: 1100px;        /* Limita a largura máxima a 1280px */
+    height: auto;            /* Define a altura em 720px */
+    margin: 0 auto;      /* Adiciona um espaço de 20px acima do banner para separar do menu */
+    position: relative;       /* Garante que o banner fique abaixo do menu */
+    overflow: hidden;         /* Oculta partes da imagem que excedem o container */
+    border-radius: 10px;    /* Mantém o arredondamento dos cantos */
+    object-fit: contain;    /* Garante que a imagem seja redimensionada sem ser cortada */
+}
+
+.hidden {
+    display: none;
 }

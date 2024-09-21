@@ -23,6 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Botão de fechar o menu lateral
     const fecharMenuLateralBtn = document.getElementById('fechar-menu-lateral');
 
+    // Imagens (Figurinhas)
+    const jogoImagens = {
+        "Assassin's Creed Valhalla": "../Assets/Ac/ac_valhalla.png",
+        "Assassin's Creed Odyssey": "../Assets/Ac/ac_odyssey.png",
+        "Assassin's Creed Origins": "../Assets/Ac/ac_origins.png",
+        "Assassin's Creed Mirage": "../Assets/Ac/ac_mirage.png",
+        "Amnesia: The Dark Descent": "../Assets/Amnesia/am_dd.png",
+        "Amnesia: A Machine For Pigs": "../Assets/Amnesia/am_mp.png",
+        "Amnesia: Rebirth": "../Assets/Amnesia/am_re.png",
+        "Amnesia: The Bunker": "../Assets/Amnesia/am_tb.png",
+        "BioShock 1": "../Assets/BioShock/bs_bs1.png",
+        "BioShock 2": "../Assets/BioShock/bs_bs2.png",
+        "BioShock Infinite": "../Assets/BioShock/bs_bsi.png",
+    };
+
+    // Imagens (Banners)
+    const franquiaBanners = {
+        "Assassin's Creed": "../Assets/Ac/banner_ac.png",
+        "Amnesia": "../Assets/Amnesia/banner_amnesia.png",
+        "BioShock": "../Assets/BioShock/banner_bs.png"
+    };
+    
     // Variáveis
     let franquias = {};  // Armazena as franquias e seus jogos com status de progresso
     let franquiaAtual = '';  // Armazena a franquia atual selecionada
@@ -72,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <strong>${franquia}</strong>
                 <div class="franquia-actions">
                     <button class="favorito-franquia" data-franquia="${franquia}">
-                        <img src="../Assets/favorito.png" alt="Favoritar">
+                        <img src="../Assets/Geral/favorito.png" alt="Favoritar">
                     </button>
                     <button class="edit" data-index="${franquia}">Editar</button>
                     <button class="remove" data-index="${franquia}">Remover</button>
@@ -129,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="status-jogo">${jogo.status}</div>
                 <div class="jogo-actions">
                     <button class="favorito-jogo" data-jogo="${jogo.nome}">
-                        <img src="../Assets/favorito.png" alt="Favoritar">
+                        <img src="../Assets/Geral/favorito.png" alt="Favoritar">
                     </button>
                     <button class="editar-status" data-index="${index}">Editar Status</button>
                     <button class="remove-jogo" data-index="${index}">Remover</button>
@@ -274,6 +296,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    function salvarFavoritos() {
+        // Salva a franquia favorita e os jogos favoritos no localStorage
+        localStorage.setItem('franquiaFavorita', JSON.stringify(franquiaFavorita));
+        localStorage.setItem('jogosFavoritos', JSON.stringify(jogosFavoritos));
+    }
+    
+    function carregarFavoritos() {
+        // Recupera a franquia favorita do localStorage
+        const franquiaSalva = localStorage.getItem('franquiaFavorita');
+        if (franquiaSalva) {
+            franquiaFavorita = JSON.parse(franquiaSalva);
+            atualizarBannerFranquia();  // Exibe o banner da franquia favorita
+        }
+    
+        // Recupera os jogos favoritos do localStorage
+        const jogosSalvos = localStorage.getItem('jogosFavoritos');
+        if (jogosSalvos) {
+            jogosFavoritos = JSON.parse(jogosSalvos);
+            atualizarFigurinhasJogos();  // Exibe os jogos favoritos
+        }
+    }   
+
+    function salvarBannerFranquia() {
+        // Salva a franquia favorita no localStorage
+        localStorage.setItem('franquiaFavorita', JSON.stringify(franquiaFavorita));
+    }
+
+    function carregarBannerFranquia() {
+        // Recupera a franquia favorita do localStorage
+        const franquiaSalva = localStorage.getItem('franquiaFavorita');
+        if (franquiaSalva) {
+            franquiaFavorita = JSON.parse(franquiaSalva);
+            atualizarBannerFranquia();  // Atualiza o banner da franquia favorita
+        }
+    }
+    
+
     // Função para marcar uma franquia como favorita
     function favoritarFranquia(event) {
         const franquia = event.target.closest('button').dataset.franquia;
@@ -288,11 +347,20 @@ document.addEventListener('DOMContentLoaded', () => {
             franquiaFavorita = null;  // Remove a franquia favorita
             esconderBannerFranquia();  // Esconde o banner da franquia
         }
+
+        salvarBannerFranquia(); // Salva os favoritos no localStorage
+        salvarFavoritos();  // Salva os favoritos no localStorage
     }
 
     // Função para marcar/desmarcar um jogo como favorito
     function favoritarJogo(event) {
         const jogo = event.target.closest('button').dataset.jogo;
+
+        // Verifica se existe uma franquia favorita antes de permitir favoritar um jogo
+        if (!franquiaFavorita) {
+            alert('Por favor, favorite uma franquia antes de favoritar um jogo.');
+            return;
+        }
 
         if (!jogosFavoritos[jogo]) {
             jogosFavoritos[jogo] = true;  // Marca o jogo como favorito
@@ -301,21 +369,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         atualizarFigurinhasJogos();  // Atualiza as figurinhas dos jogos favoritos
+        salvarFavoritos(); // Salva os favoritos no localStorage
     }
 
-    // Função para atualizar o banner da franquia favorita
     function atualizarBannerFranquia() {
-        const banner = document.getElementById('banner-franquia');
-        const imagemBanner = document.getElementById('imagem-banner');
+        const bannerContainer = document.getElementById('banner-franquia');
         
-        // Define a imagem do banner da franquia favorita
-        if (franquiaFavorita) {
-            imagemBanner.src = `./images/${franquiaFavorita}-banner.jpg`;  // Substitua pelo caminho da imagem correta
-            banner.classList.remove('hidden');  // Exibe o banner
+        // Limpa o conteúdo anterior
+        bannerContainer.innerHTML = '';
+    
+        if (franquiaFavorita && franquiaBanners[franquiaFavorita]) {
+            const img = document.createElement('img');
+            img.src = franquiaBanners[franquiaFavorita];  // Usa o banner da franquia favorita
+            img.alt = `Banner da franquia ${franquiaFavorita}`;
+            img.style.width = '100%';  // Ajusta a largura da imagem para caber no container
+    
+            bannerContainer.appendChild(img);
+            bannerContainer.classList.remove('hidden');  // Exibe o container do banner
         } else {
-            banner.classList.add('hidden');  // Esconde o banner se não houver franquia favorita
+            bannerContainer.classList.add('hidden');  // Esconde o banner se não houver franquia favorita
         }
     }
+    
 
     // Função para atualizar as figurinhas dos jogos favoritos
     function atualizarFigurinhasJogos() {
@@ -329,8 +404,16 @@ document.addEventListener('DOMContentLoaded', () => {
             jogosContainer.classList.remove('hidden');  // Exibe o container de jogos favoritos
             Object.keys(jogosFavoritos).forEach(jogo => {
                 const img = document.createElement('img');
-                img.src = `../Assets/ac.png`;  // Substitua pelo caminho da imagem correta
+
+                // Verifica se o jogo tem uma imagem correspondente
+                if (jogoImagens[jogo]) {
+                    img.src = jogoImagens[jogo];  // Usa a imagem do jogo se disponível
+                } else {
+                    img.src = "../Assets/placeholder_game.png";  // Usa uma imagem de fallback ou nada
+                }
+
                 img.alt = `Figurinha de ${jogo}`;
+                img.style.width = '120px';  // Ajuste o tamanho da imagem
                 figurinhasContainer.appendChild(img);
             });
         } else {
@@ -338,10 +421,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função para esconder o banner da franquia quando a favorita é removida
     function esconderBannerFranquia() {
-        const banner = document.getElementById('banner-franquia');
-        banner.classList.add('hidden');
+        const bannerContainer = document.getElementById('banner-franquia');
+        bannerContainer.classList.add('hidden');  // Esconde o banner
+        bannerContainer.innerHTML = '';  // Remove o conteúdo anterior
     }
 
     // Adicionar eventos de favoritar nas franquias e jogos
@@ -355,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.jogo-actions .favorito-jogo').forEach(button => {
             button.addEventListener('click', favoritarJogo);
         });
-    }
+    }   
 
     // Função de notificação
     function mostrarNotificacao(mensagem, tipo = '') {
@@ -379,5 +462,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Chame essa função sempre que atualizar as listas
     adicionarEventosFavoritos()
+
+    document.addEventListener('DOMContentLoaded', () => {
+        carregarBannerFranquia();  // Carrega o banner da franquia favorita do localStorage
+        carregarFavoritos();  // Carrega os jogos favoritos do localStorage
+    });    
 
 });
